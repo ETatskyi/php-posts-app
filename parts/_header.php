@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../assets/header.css">
 <header class="header-of-page" style="top: 0px;">
     <div class="header-content">
         <a href="/" class="company-logo">

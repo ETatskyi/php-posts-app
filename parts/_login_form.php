@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../assets/forms.css">
 <h1>Log in</h1>
 <form action="controllers/login.php" method="post">
     <?php

@@ -23,6 +23,8 @@ if ($errors) {
     }
     header("Location: " . ($_SERVER['HTTP_REFERER'] ?? '../signup.php'));
 } else {
+    header("Location: " . ($_SERVER['HTTP_REFERER'] ?? '../signup.php'));
+
 };
 
 

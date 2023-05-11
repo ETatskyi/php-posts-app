@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../assets/forms.css">
 <h1>Registation</h1>
 <form class="my-form" action="controllers/registration.php" method="post">
     <div class="input-container">

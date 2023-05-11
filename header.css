@@ -1,0 +1,44 @@
+.header-of-page {
+    position:   sticky;
+    width:      100%;
+    z-index:    11;
+    transition: all 0.3s linear;
+}
+
+.header-of-page .header-content {
+    width:     92%;
+    max-width: 1320px;
+    margin:    0 auto;
+    position:  relative;
+    padding:   20px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+.company-logo {
+    display: flex;
+    align-items: center;
+    font-size: 45px;
+    text-decoration: none;
+    cursor: pointer;
+    color: maroon;
+    font-weight: bold;
+}
+
+.logo{
+    height: 56px;
+}
+
+.right-login .button{
+    padding:          8px 10px;
+    border:           0;
+    background-color: #1cbc11;
+    cursor:           pointer;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+}

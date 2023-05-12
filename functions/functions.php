@@ -69,3 +69,18 @@ function showFormError(string $field)
         removeMessage($field);
     }
 }
+
+function checkAuth()
+{
+    return $_COOKIE['auth'] ?? false;
+}
+
+function setAuth()
+{
+    $days = 7;
+    $cookieLifetime = 60 * 60 * 24 * $days;
+
+    // setcookie('session-key', string $value, int $expire, string $path, string $domain, bool $secure, bool $httponly);
+    setcookie("auth", true, time() + $cookieLifetime, '/');
+    header("Location: " . '../blogs.php');
+}

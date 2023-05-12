@@ -1,12 +1,13 @@
 <?php
 require_once '../functions/functions.php';
 require_once '../functions/validation.php';
+require_once './CONSTANTS.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     setSessionMessage('Method not allowed', 'error');
-    header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '../index.php'));
+    header('Location: ' . ($DOMAIN . '/index.php'));
     exit;
 }
 
@@ -21,10 +22,11 @@ if ($errors) {
     foreach ($errors as $field => $fieldErrors) {
         setSessionMessage([$field => $fieldErrors]);
     }
-    header("Location: " . ($_SERVER['HTTP_REFERER'] ?? '../signup.php'));
+    header("Location: " . ($DOMAIN . '/signup.php'));
 } else {
-    header("Location: " . ($_SERVER['HTTP_REFERER'] ?? '../signup.php'));
-
+    //todo connect to database
+    setAuth();
 };
+
 
 

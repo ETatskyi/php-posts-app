@@ -1,0 +1,3 @@
+<?php
+
+$DOMAIN = 'http://aplication/';

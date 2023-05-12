@@ -1,6 +1,7 @@
 <?php
 require_once '../functions/functions.php';
 require_once '../functions/validation.php';
+require_once './CONSTANTS.php';
 
 session_start();
 
@@ -9,7 +10,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     setSessionMessage('Method not allowed', 'error');
-    header('Location: '. ($_SERVER['HTTP_REFERER'] ?? '../index.php'));
+    header('Location: '. ($DOMAIN . 'index.php'));
     exit;
 }
 

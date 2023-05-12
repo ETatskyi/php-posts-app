@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Час створення: Трв 10 2023 р., 17:57
+-- Час створення: Трв 12 2023 р., 18:12
 -- Версія сервера: 8.0.33
 -- Версія PHP: 8.1.9
 
@@ -99,7 +99,8 @@ CREATE TABLE `users_roles` (
 --
 ALTER TABLE `blogs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `blogs_ibfk_1` (`user_id`);
+  ADD KEY `blogs_ibfk_1` (`user_id`),
+  ADD KEY `not_deleted_order_by_id` (`id`,`deleted`);
 
 --
 -- Індекси таблиці `blogs_categories`

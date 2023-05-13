@@ -9,35 +9,17 @@ if (!checkAuth()) {
     header('Location:' . $DOMAIN);
 }
 
-?>
 
-<!doctype html>
-<html lang="en">
+include __DIR__ . './parts/_header.php';
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./assets/style.css">
-    <title>Registation</title>
-</head>
+include __DIR__ . './parts/_blogs_content.php';
 
-<body>
-    <?php
-    include __DIR__ . './parts/_header.php';
-    ?>
-    <?php
-    include __DIR__ . './parts/_blogs_content.php';
-    ?>
-    <?php
-    if (!isset($_REQUEST['mode'])) {
-        include __DIR__ . './parts/_blogs_pick_mode.php';
-    } else if ($_REQUEST['mode'] == 'view') {
-        include __DIR__ . './parts/_blogs_view.php';
-    } else if ($_REQUEST['mode'] == 'add') {
-        include __DIR__ . './parts/_blogs_add.php';
-    }
-    ?>
+if (!isset($_REQUEST['mode'])) {
+    include __DIR__ . './parts/_blogs_pick_mode.php';
+} else if ($_REQUEST['mode'] == 'view') {
+    include __DIR__ . './parts/_blogs_view.php';
+} else if ($_REQUEST['mode'] == 'add') {
+    include __DIR__ . './parts/_blogs_add.php';
+}
 
-</body>
-
-</html>
+include __DIR__ . './parts/_footer.php';

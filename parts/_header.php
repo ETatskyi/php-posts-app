@@ -3,6 +3,17 @@ require_once __DIR__ . '/../functions/functions.php';
 require_once __DIR__ . '/../controllers/CONSTANTS.php';
 ?>
 
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Registation</title>
+</head>
+
+<body>
 <link rel="stylesheet" href="../assets/header.css">
 <header class="header-of-page" style="top: 0px;">
     <div class="header-content">

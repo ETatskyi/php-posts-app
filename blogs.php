@@ -5,7 +5,7 @@ require_once __DIR__ . '/controllers/CONSTANTS.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-if (!checkAuth()){
+if (!checkAuth()) {
     header('Location:' . $DOMAIN);
 }
 
@@ -22,15 +22,21 @@ if (!checkAuth()){
 </head>
 
 <body>
-
     <?php
     include __DIR__ . './parts/_header.php';
     ?>
     <?php
     include __DIR__ . './parts/_blogs_content.php';
     ?>
-
-
+    <?php
+    if (!isset($_REQUEST['mode'])) {
+        include __DIR__ . './parts/_blogs_pick_mode.php';
+    } else if ($_REQUEST['mode'] == 'view') {
+        include __DIR__ . './parts/_blogs_view.php';
+    } else if ($_REQUEST['mode'] == 'add') {
+        include __DIR__ . './parts/_blogs_add.php';
+    }
+    ?>
 
 </body>
 

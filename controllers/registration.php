@@ -25,7 +25,7 @@ if ($errors) {
     header("Location: " . ($DOMAIN . '/signup.php'));
 } else {
     //todo connect to database
-    setAuth();
+    setAuth(true);
 };
 
 

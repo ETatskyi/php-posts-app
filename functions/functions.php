@@ -75,12 +75,12 @@ function checkAuth()
     return $_COOKIE['auth'] ?? false;
 }
 
-function setAuth()
+function setAuth($value, $days = 7)
 {
-    $days = 7;
+
     $cookieLifetime = 60 * 60 * 24 * $days;
 
     // setcookie('session-key', string $value, int $expire, string $path, string $domain, bool $secure, bool $httponly);
-    setcookie("auth", true, time() + $cookieLifetime, '/');
+    setcookie("auth", $value, time() + $cookieLifetime, '/');
     header("Location: " . '../blogs.php');
 }

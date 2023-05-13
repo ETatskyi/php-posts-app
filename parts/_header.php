@@ -16,13 +16,13 @@ require_once __DIR__ . '/../controllers/CONSTANTS.php';
 
             </div>
             <?= checkAuth() ? ('
-                <div class="right-login">
+                <div class="flex-block">
                 <a href="/blogs.php?mode=add" class="button primary-button">Add blog</a>
                 <a href="/blogs.php?mode=view" class="button primary-button">View blogs</a>
                 <a href="/signout.php" class="button secondary-button">Log out</a>
                 </div>
             ') : ('
-                <div class="right-login">
+                <div class="flex-block">
                 <a href="/signin.php" class="button primary-button">Log in</a>
                 <a href="/signup.php" class="button secondary-button">Register for Free</a>
                 </div>

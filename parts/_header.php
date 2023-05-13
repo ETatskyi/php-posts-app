@@ -10,6 +10,7 @@ require_once __DIR__ . '/../controllers/CONSTANTS.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="./assets/style.css">
+    <link rel="icon" type="image/x-icon" href="./assets/logo.png">
     <title>Registation</title>
 </head>
 

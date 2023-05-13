@@ -16,8 +16,6 @@
     justify-content: space-between;
 }
 
-
-
 .company-logo {
     display: flex;
     align-items: center;
@@ -32,13 +30,6 @@
     height: 56px;
 }
 
-.right-login .button{
-    padding:          8px 10px;
-    border:           0;
-    background-color: #1cbc11;
-    cursor:           pointer;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 4px;
+.right-login{
+    display: flex;
 }

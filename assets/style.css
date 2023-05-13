@@ -6,16 +6,29 @@ body {
     background-color: #f8f8f8;
 }
 
-.btn {
-    display:          block;
-    width:            21.5%;
-    margin-left:      auto;
-    margin-right:     auto;
-    padding:          8px 10px;
-    border:           0;
+.button {
+    display:         block;
+    margin-left:     auto;
+    margin-right:    auto;
+    padding:         8px 10px;
+    border:          0;
+    cursor:          pointer;
+    font-family:     inherit;
+    font-size:       16px;
+    color:           white;
+    text-decoration: none;
+    font-weight:     600;
+    border-radius:   4px;
+}
+
+.button:not(:last-of-type) {
+    margin-right: 5px;
+}
+
+.button.primary-button {
     background-color: #1cbc11;
-    cursor:           pointer;
-    font-family:      inherit;
-    font-size:        16px;
-    color:            #fff;
+}
+
+.button.secondary-button {
+    background-color: rgb(152, 152, 152)
 }

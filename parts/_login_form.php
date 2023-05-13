@@ -11,5 +11,5 @@
     ?>
     <input class="input" type="email" name="email" placeholder="e-mail">
     <input class="input" type="password" name="password" placeholder="password">
-    <button class="btn" type="submit">Log in!</button>
+    <button class="button primary-button" type="submit">Log in!</button>
 </form>

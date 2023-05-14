@@ -36,6 +36,8 @@ CREATE TABLE `blogs` (
   `text` text,
   `image` varchar(500) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -49,7 +51,9 @@ CREATE TABLE `blogs_categories` (
   `id` int UNSIGNED NOT NULL,
   `blog_id` bigint UNSIGNED NOT NULL,
   `category_id` int UNSIGNED NOT NULL,
-  `deleted` tinyint NOT NULL DEFAULT '0'
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -61,7 +65,9 @@ CREATE TABLE `blogs_categories` (
 CREATE TABLE `categories` (
   `id` int UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL,
-  `deleted` tinyint NOT NULL DEFAULT '0'
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -72,11 +78,13 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `role_id` int UNSIGNED NOT NULL,
+  `role_id` int UNSIGNED NOT NULL DEFAULT '1',
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'no name',
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -89,7 +97,32 @@ CREATE TABLE `users` (
 CREATE TABLE `users_roles` (
   `id` int UNSIGNED NOT NULL,
   `role` varchar(10) NOT NULL DEFAULT 'user',
-  `deleted` tinyint NOT NULL DEFAULT '0'
+  `deleted` tinyint NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп даних таблиці `users_roles`
+--
+
+INSERT INTO `users_roles` (`id`, `role`, `deleted`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'user', 0, '2023-05-14 13:50:03', '2023-05-14 23:04:54', '2023-05-16 23:06:59'),
+(2, 'admin', 0, '2023-05-14 13:50:03', '2023-05-14 23:04:54', '2023-05-15 23:06:20');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `users_sessions`
+--
+
+CREATE TABLE `users_sessions` (
+  `id` int UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `token` int NOT NULL,
+  `user_agent` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -133,6 +166,14 @@ ALTER TABLE `users_roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Індекси таблиці `users_sessions`
+--
+ALTER TABLE `users_sessions`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `token` (`token`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT для збережених таблиць
 --
 
@@ -158,12 +199,18 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблиці `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблиці `users_roles`
 --
 ALTER TABLE `users_roles`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблиці `users_sessions`
+--
+ALTER TABLE `users_sessions`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -188,6 +235,12 @@ ALTER TABLE `blogs_categories`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `users_roles` (`id`);
+
+--
+-- Обмеження зовнішнього ключа таблиці `users_sessions`
+--
+ALTER TABLE `users_sessions`
+  ADD CONSTRAINT `users_sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

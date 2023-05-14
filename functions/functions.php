@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../controllers/CONSTANTS.php';
 function setSessionMessage(string|array $message, string $type = 'alerts')
 {
     if (!isset($_SESSION['messages'])) {
@@ -63,7 +63,7 @@ function removeMessage(string $name): void
 function showFormError(string $field)
 {
     if (hasErrors($field)) {
-        $message = 'The field ' . str_replace('_', ' ', $field) . ' ' . implode(', ', getSessionMessageList()[$field]);
+        $message = 'Error: ' . str_replace('_', ' ', $field) . ' ' . implode(', ', getSessionMessageList()[$field]);
         echo "<span class='field-error'>" . $message . "</span>";
 
         removeMessage($field);
@@ -83,4 +83,27 @@ function setAuth($value, $days = 7)
     // setcookie('session-key', string $value, int $expire, string $path, string $domain, bool $secure, bool $httponly);
     setcookie("auth", $value, time() + $cookieLifetime, '/');
     header("Location: " . '../blogs.php');
+}
+
+function isEmailExists($dbconnect, $email)
+{
+    return $dbconnect->query("SELECT COUNT(`email`) as `count` FROM `users` WHERE `email`='$email'")->fetch()['count'];
+}
+
+
+function usersMultipleInsert($dbconnect, array $users)
+{   
+    if(count($users)==0) return;
+
+    $query = "INSERT INTO `users` (`name`, `email`, `password`) VALUES ";
+
+    foreach ($users as $user) {
+        $name = $user['name'];
+        $email = $user['email'];
+        $password = password_hash($user['password'], PASSWORD_BCRYPT);
+        
+        $query .= "('$name', '$email', '$password')";
+    }
+
+    $dbconnect->query($query);
 }

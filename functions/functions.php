@@ -85,25 +85,23 @@ function setAuth($value, $days = 7)
     header("Location: " . '../blogs.php');
 }
 
-function isEmailExists($dbconnect, $email)
+function saveFormData($formName, $formData)
 {
-    return $dbconnect->query("SELECT COUNT(`email`) as `count` FROM `users` WHERE `email`='$email'")->fetch()['count'];
+    $_SESSION['savedFormData'][$formName] = $formData;
 }
 
-
-function usersMultipleInsert($dbconnect, array $users)
-{   
-    if(count($users)==0) return;
-
-    $query = "INSERT INTO `users` (`name`, `email`, `password`) VALUES ";
-
-    foreach ($users as $user) {
-        $name = $user['name'];
-        $email = $user['email'];
-        $password = password_hash($user['password'], PASSWORD_BCRYPT);
-        
-        $query .= "('$name', '$email', '$password')";
+function getFormData($formName, $fieldName)
+{
+    if (isset($_SESSION['savedFormData'][$formName][$fieldName])) {
+        return $_SESSION['savedFormData'][$formName][$fieldName];
     }
 
-    $dbconnect->query($query);
+    return '';
+}
+
+function clearSavedFormData()
+{
+    if (isset($_SESSION['savedFormData'])) {
+        $_SESSION['savedFormData'] = [];
+    }
 }

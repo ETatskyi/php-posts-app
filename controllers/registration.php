@@ -23,20 +23,24 @@ if ($errors) {
     foreach ($errors as $field => $fieldErrors) {
         setSessionMessage([$field => $fieldErrors]);
     }
+
+    clearSavedFormData();
+    saveFormData('registration', $_POST);
     header("Location: " . (DOMAIN . '/signup.php'));
 } else {
     //connect to database
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     if (!isEmailExists($connect, $email)) {
-        $query = "INSERT INTO `users` (`name`, `email`, `password`) VALUES ('$name', '$email', '$password')";
-        $connect->query($query);
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+        registerUser($connect, ['name' => $name, 'email' => $email, 'password' => $password]);
+
         setAuth(true);
+        clearSavedFormData();
     } else {
         setSessionMessage(['registration_failed:' => ['email already exists']]);
         header("Location: " . (DOMAIN . '/signup.php'));
     }
-
 };

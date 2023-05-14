@@ -15,6 +15,7 @@ function validate(array $fields, array $rules)
                 if (!required($fields[$fieldName])) {
                     $errors[$fieldName][] = "is required";
                 }
+                continue 2;
             }
             //min length
             if (mb_strpos($rule, 'min_length') !== false) {

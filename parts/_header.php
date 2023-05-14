@@ -31,7 +31,7 @@ require_once __DIR__ . '/../controllers/CONSTANTS.php';
                 <div class="flex-block">
                 <a href="/blogs.php?mode=add" class="button primary-button">Add blog</a>
                 <a href="/blogs.php?mode=view" class="button primary-button">View blogs</a>
-                <a href="/signout.php" class="button secondary-button">Log out</a>
+                <a href="controllers/signout.php" class="button secondary-button">Log out</a>
                 </div>
             ') : ('
                 <div class="flex-block">

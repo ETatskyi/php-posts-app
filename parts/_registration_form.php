@@ -17,5 +17,8 @@
         <input class="input" type="password" name="password_confirm" placeholder="confirm password" value="12345678Aa">
         <?php showFormError('password_confirm') ?>
     </div>
+    <div class="input-container">
         <button class="button primary-button" type="submit">Submit</button>
+        <?php showFormError('registration_failed:') ?>
+    </div>
 </form>
